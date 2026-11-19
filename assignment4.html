@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment #4 — Simple Payroll System | Cassandra Leanne</title>
+    <meta
+      name="description"
+      content="Assignment #4: Interactive employee payroll calculator with automatic Gross Pay, Net Pay, and line-number deletion."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/main.js"></script>
+    <script defer src="js/assignment4.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.5c1.5 2.4 1.5 5 0 7.2-1.5-2.2-1.5-4.8 0-7.2Zm7.4 4.8c-1.1 2.6-3.2 4.3-5.8 4.8.8-2.6 2.8-4.3 5.8-4.8Zm2 8.7c-2.8.4-5.2-.7-6.8-2.8 2.6-.7 5.2.3 6.8 2.8Zm-9.4 5.5c-1.5-2.4-1.5-5 0-7.2 1.5 2.2 1.5 4.8 0 7.2Zm-9.4-5.5c1.6-2.5 4.2-3.5 6.8-2.8-1.6 2.1-4 3.2-6.8 2.8Zm2-8.7c3 .5 5 2.2 5.8 4.8-2.6-.5-4.7-2.2-5.8-4.8Z"/>
+          </svg>
+          Cassandra Leanne
+        </a>
+
+        <nav class="nav-links" aria-label="Primary Navigation">
+          <a href="index.html" class="nav-link" data-nav-target="index.html">Home</a>
+          <a href="about.html" class="nav-link" data-nav-target="about.html">About Me</a>
+          <a href="assignments.html" class="nav-link" data-nav-target="assignments.html">Assignments</a>
+        </nav>
+
+        <div class="header-action">
+          <a href="assignments.html" class="btn btn-secondary btn-compact">All Assignments</a>
+          <button
+            type="button"
+            id="mobile-menu-toggle"
+            class="mobile-toggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-drawer"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="4" y1="7" x2="20" y2="7"></line>
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="17" x2="20" y2="17"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <nav id="mobile-drawer" class="mobile-drawer" aria-label="Mobile Navigation">
+        <a href="index.html" class="nav-link" data-nav-target="index.html">Home</a>
+        <a href="about.html" class="nav-link" data-nav-target="about.html">About Me</a>
+        <a href="assignments.html" class="nav-link" data-nav-target="assignments.html">Assignments</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="assignment-header">
+        <div class="container">
+          <div class="assignment-topbar">
+            <div class="meta-line">
+              <span>Assignment #4</span>
+              <span aria-hidden="true">&middot;</span>
+              <span>Payroll Management &amp; Table State</span>
+            </div>
+            <a href="assignments.html" class="btn btn-secondary btn-compact">&larr; Back to Assignments</a>
+          </div>
+          <h1 class="page-title">Simple Payroll System</h1>
+          <p class="lead">
+            Add employees to compute Gross Pay and Net Pay in Philippine Peso (&#8369;), or remove
+            any employee from the payroll table using their current line number.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="payroll-layout">
+            <!-- Add Employee Panel -->
+            <div class="panel">
+              <h2 class="panel-title">Add Employee</h2>
+              <p class="panel-subtitle">
+                Gross Pay = Days Worked &times; Daily Rate &middot; Net Pay = Gross Pay &minus; Deduction
+              </p>
+
+              <form id="payroll-add-form" class="form-stack" novalidate>
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label for="employee-name" class="form-label">Employee Name</label>
+                    <input
+                      type="text"
+                      id="employee-name"
+                      class="form-control"
+                      placeholder="e.g., Maria Santos"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="days-worked" class="form-label">Days Worked</label>
+                    <input
+                      type="number"
+                      id="days-worked"
+                      class="form-control tabular"
+                      step="any"
+                      min="0"
+                      placeholder="e.g., 15"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label for="daily-rate" class="form-label">Daily Rate (&#8369;)</label>
+                    <input
+                      type="number"
+                      id="daily-rate"
+                      class="form-control tabular"
+                      step="any"
+                      min="0"
+                      placeholder="e.g., 650"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="deduction-amount" class="form-label">Deduction Amount (&#8369;)</label>
+                    <input
+                      type="number"
+                      id="deduction-amount"
+                      class="form-control tabular"
+                      step="any"
+                      min="0"
+                      placeholder="e.g., 450"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="button-row">
+                  <button type="submit" id="add-employee-btn" class="btn btn-primary">
+                    Add Employee
+                  </button>
+                </div>
+              </form>
+
+              <div id="payroll-add-error" class="feedback-box feedback-error" role="alert"></div>
+            </div>
+
+            <!-- Delete Employee Panel -->
+            <div class="panel">
+              <h2 class="panel-title">Delete Employee</h2>
+              <p class="panel-subtitle">
+                Enter the employee’s current line number (No.) from the payroll table.
+              </p>
+
+              <form id="payroll-delete-form" class="form-stack" novalidate>
+                <div class="form-group">
+                  <label for="delete-line-number" class="form-label">Line Number (No.)</label>
+                  <input
+                    type="number"
+                    id="delete-line-number"
+                    class="form-control tabular"
+                    min="1"
+                    step="1"
+                    placeholder="e.g., 1"
+                    required
+                  />
+                  <span class="form-hint">Remaining rows renumber automatically after deletion.</span>
+                </div>
+
+                <div class="button-row">
+                  <button type="submit" id="delete-employee-btn" class="btn btn-secondary">
+                    Delete Employee
+                  </button>
+                </div>
+              </form>
+
+              <div id="payroll-delete-error" class="feedback-box feedback-error" role="alert"></div>
+            </div>
+          </div>
+
+          <!-- Payroll Table -->
+          <div>
+            <h2 class="section-title">Payroll List</h2>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Employee Name</th>
+                    <th class="col-num">Days Worked</th>
+                    <th class="col-num">Daily Rate</th>
+                    <th class="col-num">Gross Pay</th>
+                    <th class="col-num">Deduction Amount</th>
+                    <th class="col-num">Net Pay</th>
+                  </tr>
+                </thead>
+                <tbody id="payroll-table-body">
+                  <tr>
+                    <td colspan="7" class="empty-cell">
+                      No employees in the payroll list yet. Add an employee above to view payroll records.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div id="payroll-summary-bar" class="payroll-summary" hidden>
+              <span>Total Employees: <strong id="payroll-total-employees" class="tabular">0</strong></span>
+              <span>Total Net Payroll: <strong id="payroll-total-net" class="tabular">&#8369;0</strong></span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <p class="footer-brand">Cassandra Leanne</p>
+            <p class="footer-meta">
+              BS Computer Science Student · Davao, Philippines · cnantin@addu.edu.ph
+            </p>
+          </div>
+          <div class="footer-links">
+            <a href="index.html" class="footer-link">Home</a>
+            <a href="about.html" class="footer-link">About Me</a>
+            <a href="assignments.html" class="footer-link">Assignments</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; <span id="current-year">2026</span> Cassandra Leanne. Personal Portfolio.</span>
+          <span>Assignment #4 · Simple Payroll System</span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

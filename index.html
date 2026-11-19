@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leanne Reyes — CS Portfolio &amp; Assignments</title>
+    <meta
+      name="description"
+      content="A pink-themed personal portfolio and programming assignments website built with HTML, CSS, and vanilla JavaScript."
+    />
+    <meta property="og:title" content="Leanne Reyes — CS Portfolio &amp; Assignments" />
+    <meta
+      property="og:description"
+      content="Personal portfolio and interactive JavaScript programming assignments by a Computer Science student."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.5c1.5 2.4 1.5 5 0 7.2-1.5-2.2-1.5-4.8 0-7.2Zm7.4 4.8c-1.1 2.6-3.2 4.3-5.8 4.8.8-2.6 2.8-4.3 5.8-4.8Zm2 8.7c-2.8.4-5.2-.7-6.8-2.8 2.6-.7 5.2.3 6.8 2.8Zm-9.4 5.5c-1.5-2.4-1.5-5 0-7.2 1.5 2.2 1.5 4.8 0 7.2Zm-9.4-5.5c1.6-2.5 4.2-3.5 6.8-2.8-1.6 2.1-4 3.2-6.8 2.8Zm2-8.7c3 .5 5 2.2 5.8 4.8-2.6-.5-4.7-2.2-5.8-4.8Z"/>
+          </svg>
+          Leanne Reyes
+        </a>
+
+        <nav class="nav-links" aria-label="Primary Navigation">
+          <a href="index.html" class="nav-link" data-nav-target="index.html">Home</a>
+          <a href="about.html" class="nav-link" data-nav-target="about.html">About Me</a>
+          <a href="assignments.html" class="nav-link" data-nav-target="assignments.html">Assignments</a>
+        </nav>
+
+        <div class="header-action">
+          <a href="assignments.html" class="btn btn-primary btn-compact">View Assignments</a>
+          <button
+            type="button"
+            id="mobile-menu-toggle"
+            class="mobile-toggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-drawer"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="4" y1="7" x2="20" y2="7"></line>
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="17" x2="20" y2="17"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <nav id="mobile-drawer" class="mobile-drawer" aria-label="Mobile Navigation">
+        <a href="index.html" class="nav-link" data-nav-target="index.html">Home</a>
+        <a href="about.html" class="nav-link" data-nav-target="about.html">About Me</a>
+        <a href="assignments.html" class="nav-link" data-nav-target="assignments.html">Assignments</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="hero-single">
+            <div class="hero-copy">
+              <p class="kicker">BS Computer Science · Personal Portfolio</p>
+              <h1 class="display-title">Hello, I’m <em class="hero-accent">Leanne Reyes.</em></h1>
+              <p class="lead">
+                I am a Computer Science student exploring clean web interfaces, structured problem
+                solving, and practical JavaScript applications. Welcome to my digital portfolio
+                and collection of interactive programming assignments.
+              </p>
+              <div class="hero-actions">
+                <a href="about.html" class="btn btn-primary">About Me</a>
+                <a href="assignments.html" class="text-link">Browse All Assignments &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="snapshot-strip">
+            <div class="snapshot-item">
+              <span class="snapshot-label">Academic Program</span>
+              <span class="snapshot-value">Bachelor of Science in Computer Science</span>
+            </div>
+            <div class="snapshot-item">
+              <span class="snapshot-label">Core Technologies</span>
+              <span class="snapshot-value">HTML5 · CSS3 · Vanilla JavaScript</span>
+            </div>
+            <div class="snapshot-item">
+              <span class="snapshot-label">Coursework Collection</span>
+              <span class="snapshot-value">4 Interactive JavaScript Calculators</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-blush">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <p class="kicker">Programming Coursework</p>
+              <h2 class="section-title">Featured Programming Assignments</h2>
+              <p class="body-text">
+                Four standalone web utilities designed with vanilla JavaScript to solve unit
+                conversions, graduated tax computation, loop-based arithmetic, and payroll tracking.
+              </p>
+            </div>
+            <a href="assignments.html" class="btn btn-secondary">All Assignments</a>
+          </div>
+
+          <div class="cards-grid">
+            <article class="card">
+              <div class="card-body">
+                <div class="card-head">
+                  <span class="card-index">01</span>
+                  <div class="meta-line">
+                    <span>Assignment 01</span>
+                    <span aria-hidden="true">&middot;</span>
+                    <span>Unit Formulas</span>
+                  </div>
+                </div>
+                <h3 class="card-title">Conversion Calculator</h3>
+                <p class="card-desc">
+                  Converts between Celsius and Fahrenheit as well as Meters and Feet with input
+                  validation and quick reset controls.
+                </p>
+              </div>
+              <div class="card-footer">
+                <span class="meta-line">Temperature &amp; Length</span>
+                <a href="assignment1.html" class="btn btn-primary btn-compact">Open Calculator</a>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-body">
+                <div class="card-head">
+                  <span class="card-index">02</span>
+                  <div class="meta-line">
+                    <span>Assignment 02</span>
+                    <span aria-hidden="true">&middot;</span>
+                    <span>Conditional Logic</span>
+                  </div>
+                </div>
+                <h3 class="card-title">Income Tax Calculator</h3>
+                <p class="card-desc">
+                  Computes Philippine graduated income tax across six brackets, highlights the
+                  matching tier, and formats values in Philippine Peso (₱).
+                </p>
+              </div>
+              <div class="card-footer">
+                <span class="meta-line">6 Tax Brackets</span>
+                <a href="assignment2.html" class="btn btn-primary btn-compact">Open Calculator</a>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-body">
+                <div class="card-head">
+                  <span class="card-index">03</span>
+                  <div class="meta-line">
+                    <span>Assignment 03</span>
+                    <span aria-hidden="true">&middot;</span>
+                    <span>Loop Structures</span>
+                  </div>
+                </div>
+                <h3 class="card-title">Natural Numbers Calculator</h3>
+                <p class="card-desc">
+                  Three separate calculators computing N factorial with a while loop, sum with a
+                  do-while loop, and average with a for loop.
+                </p>
+              </div>
+              <div class="card-footer">
+                <span class="meta-line">While · Do-While · For</span>
+                <a href="assignment3.html" class="btn btn-primary btn-compact">Open Calculator</a>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-body">
+                <div class="card-head">
+                  <span class="card-index">04</span>
+                  <div class="meta-line">
+                    <span>Assignment 04</span>
+                    <span aria-hidden="true">&middot;</span>
+                    <span>Dynamic Arrays &amp; Tables</span>
+                  </div>
+                </div>
+                <h3 class="card-title">Simple Payroll System</h3>
+                <p class="card-desc">
+                  Adds employees with automatic Gross Pay and Net Pay calculations, maintains line
+                  numbering, and removes records by line number.
+                </p>
+              </div>
+              <div class="card-footer">
+                <span class="meta-line">Live Payroll Table</span>
+                <a href="assignment4.html" class="btn btn-primary btn-compact">Open System</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <p class="footer-brand">Leanne Reyes</p>
+            <p class="footer-meta">
+              BS Computer Science Student · Manila, Philippines · leanne.reyes@example.edu
+            </p>
+          </div>
+
+          <div class="footer-links" aria-label="Social and Portfolio Links">
+            <a href="about.html" class="footer-link">About Me</a>
+            <a href="assignments.html" class="footer-link">Assignments</a>
+            <a href="#github-placeholder" class="footer-link">GitHub</a>
+            <a href="#linkedin-placeholder" class="footer-link">LinkedIn</a>
+            <a href="#instagram-placeholder" class="footer-link">Instagram</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span>&copy; <span id="current-year">2026</span> Leanne Reyes. Personal Portfolio.</span>
+          <span>Built with HTML, CSS &amp; Vanilla JavaScript</span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

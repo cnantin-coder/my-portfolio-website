@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment #1 — Conversion Calculator | Leanne Reyes</title>
+    <meta
+      name="description"
+      content="Assignment #1: Unit conversion calculator for Celsius, Fahrenheit, Meters, and Feet."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/main.js"></script>
+    <script defer src="js/assignment1.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.5c1.5 2.4 1.5 5 0 7.2-1.5-2.2-1.5-4.8 0-7.2Zm7.4 4.8c-1.1 2.6-3.2 4.3-5.8 4.8.8-2.6 2.8-4.3 5.8-4.8Zm2 8.7c-2.8.4-5.2-.7-6.8-2.8 2.6-.7 5.2.3 6.8 2.8Zm-9.4 5.5c-1.5-2.4-1.5-5 0-7.2 1.5 2.2 1.5 4.8 0 7.2Zm-9.4-5.5c1.6-2.5 4.2-3.5 6.8-2.8-1.6 2.1-4 3.2-6.8 2.8Zm2-8.7c3 .5 5 2.2 5.8 4.8-2.6-.5-4.7-2.2-5.8-4.8Z"/>
+          </svg>
+          Leanne Reyes
+        </a>
+
+        <nav class="nav-links" aria-label="Primary Navigation">
+          <a href="index.html" class="nav-link" data-nav-target="index.html">Home</a>
+          <a href="about.html" class="nav-link" data-nav-target="about.html">About Me</a>
+          <a href="assignments.html" class="nav-link" data-nav-target="assignments.html">Assignments</a>
+        </nav>
+
+        <div class="header-action">
+          <a href="assignments.html" class="btn btn-secondary btn-compact">All Assignments</a>
+          <button
+            type="button"
+            id="mobile-menu-toggle"
+            class="mobile-toggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-drawer"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="4" y1="7" x2="20" y2="7"></line>
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="17" x2="20" y2="17"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <nav id="mobile-drawer" class="mobile-drawer" aria-label="Mobile Navigation">
+        <a href="index.html" class="nav-link" data-nav-target="index.html">Home</a>
+        <a href="about.html" class="nav-link" data-nav-target="about.html">About Me</a>
+        <a href="assignments.html" class="nav-link" data-nav-target="assignments.html">Assignments</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="assignment-header">
+        <div class="container">
+          <div class="assignment-topbar">
+            <div class="meta-line">
+              <span>Assignment #1</span>
+              <span aria-hidden="true">&middot;</span>
+              <span>JavaScript Arithmetic &amp; Validation</span>
+            </div>
+            <a href="assignments.html" class="btn btn-secondary btn-compact">&larr; Back to Assignments</a>
+          </div>
+          <h1 class="page-title">Conversion Calculator</h1>
+          <p class="lead">
+            Convert temperature values between Celsius and Fahrenheit, or length measurements between
+            Meters and Feet using standard formulas.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="workspace-grid">
+            <div class="panel">
+              <h2 class="panel-title">Enter Value to Convert</h2>
+              <p class="panel-subtitle">Choose a conversion direction and click Convert.</p>
+
+              <form id="conversion-form" class="form-stack" novalidate>
+                <div class="form-group">
+                  <label for="conversion-value" class="form-label">Input Value</label>
+                  <input
+                    type="number"
+                    id="conversion-value"
+                    name="conversionValue"
+                    class="form-control tabular"
+                    step="any"
+                    placeholder="e.g., 100"
+                    required
+                  />
+                  <span class="form-hint">Negative numbers are supported for temperature conversions.</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="conversion-type" class="form-label">Conversion Type</label>
+                  <select id="conversion-type" name="conversionType" class="form-control">
+                    <option value="c-to-f">Celsius to Fahrenheit (&deg;C &rarr; &deg;F)</option>
+                    <option value="f-to-c">Fahrenheit to Celsius (&deg;F &rarr; &deg;C)</option>
+                    <option value="m-to-ft">Meters to Feet (m &rarr; ft)</option>
+                    <option value="ft-to-m">Feet to Meters (ft &rarr; m)</option>
+                  </select>
+                </div>
+
+                <div class="button-row">
+                  <button type="submit" id="convert-btn" class="btn btn-primary">Convert</button>
+                  <button type="button" id="reset-conversion-btn" class="btn btn-secondary">Clear / Reset</button>
+                </div>
+              </form>
+
+              <div id="conversion-error" class="feedback-box feedback-error" role="alert"></div>
+            </div>
+
+            <div class="panel-elevated">
+              <h2 class="panel-title">Converted Result</h2>
+              <p class="panel-subtitle">Calculated output and formula summary appear below.</p>
+
+              <div class="result-card" aria-live="polite">
+                <p class="result-label">Output Value</p>
+                <p id="conversion-result-primary" class="result-primary">&mdash;</p>
+
+                <dl class="result-breakdown">
+                  <div class="result-row">
+                    <dt>Entered Input</dt>
+                    <dd id="conversion-input-echo" class="tabular">Waiting for input</dd>
+                  </div>
+                  <div class="result-row">
+                    <dt>Formula Applied</dt>
+                    <dd id="conversion-formula-echo">Select a conversion type</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-blush">
+        <div class="container">
+          <h2 class="section-title">Conversion Formulas Reference</h2>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Conversion</th>
+                  <th>Formula</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Celsius to Fahrenheit</td>
+                  <td class="tabular">Fahrenheit = (Celsius &times; 9/5) + 32</td>
+                </tr>
+                <tr>
+                  <td>Fahrenheit to Celsius</td>
+                  <td class="tabular">Celsius = (Fahrenheit &minus; 32) &times; 5/9</td>
+                </tr>
+                <tr>
+                  <td>Meters to Feet</td>
+                  <td class="tabular">Feet = Meters &times; 3.28084</td>
+                </tr>
+                <tr>
+                  <td>Feet to Meters</td>
+                  <td class="tabular">Meters = Feet &divide; 3.28084</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <p class="footer-brand">Leanne Reyes</p>
+            <p class="footer-meta">
+              BS Computer Science Student · Manila, Philippines · leanne.reyes@example.edu
+            </p>
+          </div>
+          <div class="footer-links">
+            <a href="index.html" class="footer-link">Home</a>
+            <a href="about.html" class="footer-link">About Me</a>
+            <a href="assignments.html" class="footer-link">Assignments</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; <span id="current-year">2026</span> Leanne Reyes. Personal Portfolio.</span>
+          <span>Assignment #1 · Conversion Calculator</span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

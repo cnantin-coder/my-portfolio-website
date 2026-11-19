@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment #2 — Income Tax Calculator | Leanne Reyes</title>
+    <meta
+      name="description"
+      content="Assignment #2: Philippine graduated income tax calculator formatted in Philippine Peso (₱)."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/main.js"></script>
+    <script defer src="js/assignment2.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.5c1.5 2.4 1.5 5 0 7.2-1.5-2.2-1.5-4.8 0-7.2Zm7.4 4.8c-1.1 2.6-3.2 4.3-5.8 4.8.8-2.6 2.8-4.3 5.8-4.8Zm2 8.7c-2.8.4-5.2-.7-6.8-2.8 2.6-.7 5.2.3 6.8 2.8Zm-9.4 5.5c-1.5-2.4-1.5-5 0-7.2 1.5 2.2 1.5 4.8 0 7.2Zm-9.4-5.5c1.6-2.5 4.2-3.5 6.8-2.8-1.6 2.1-4 3.2-6.8 2.8Zm2-8.7c3 .5 5 2.2 5.8 4.8-2.6-.5-4.7-2.2-5.8-4.8Z"/>
+          </svg>
+          Leanne Reyes
+        </a>
+
+        <nav class="nav-links" aria-label="Primary Navigation">
+          <a href="index.html" class="nav-link" data-nav-target="index.html">Home</a>
+          <a href="about.html" class="nav-link" data-nav-target="about.html">About Me</a>
+          <a href="assignments.html" class="nav-link" data-nav-target="assignments.html">Assignments</a>
+        </nav>
+
+        <div class="header-action">
+          <a href="assignments.html" class="btn btn-secondary btn-compact">All Assignments</a>
+          <button
+            type="button"
+            id="mobile-menu-toggle"
+            class="mobile-toggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-drawer"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="4" y1="7" x2="20" y2="7"></line>
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="17" x2="20" y2="17"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <nav id="mobile-drawer" class="mobile-drawer" aria-label="Mobile Navigation">
+        <a href="index.html" class="nav-link" data-nav-target="index.html">Home</a>
+        <a href="about.html" class="nav-link" data-nav-target="about.html">About Me</a>
+        <a href="assignments.html" class="nav-link" data-nav-target="assignments.html">Assignments</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="assignment-header">
+        <div class="container">
+          <div class="assignment-topbar">
+            <div class="meta-line">
+              <span>Assignment #2</span>
+              <span aria-hidden="true">&middot;</span>
+              <span>Conditional Tax Brackets</span>
+            </div>
+            <a href="assignments.html" class="btn btn-secondary btn-compact">&larr; Back to Assignments</a>
+          </div>
+          <h1 class="page-title">Income Tax Calculator</h1>
+          <p class="lead">
+            Enter your net taxable income in Philippine Peso (₱) to compute your income tax and
+            inspect the applicable graduated tax bracket.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="workspace-grid">
+            <div class="panel">
+              <h2 class="panel-title">Net Taxable Income</h2>
+              <p class="panel-subtitle">Provide a non-negative income amount without currency symbols.</p>
+
+              <form id="tax-form" class="form-stack" novalidate>
+                <div class="form-group">
+                  <label for="taxable-income" class="form-label">Taxable Income (&#8369;)</label>
+                  <input
+                    type="number"
+                    id="taxable-income"
+                    name="taxableIncome"
+                    class="form-control tabular"
+                    step="any"
+                    min="0"
+                    placeholder="e.g., 520000"
+                    required
+                  />
+                  <span class="form-hint">Enter numeric digits only (e.g., 320000 for &#8369;320,000).</span>
+                </div>
+
+                <div class="button-row">
+                  <button type="submit" id="compute-tax-btn" class="btn btn-primary">Compute Tax</button>
+                  <button type="button" id="clear-tax-btn" class="btn btn-secondary">Clear</button>
+                </div>
+              </form>
+
+              <div id="tax-error" class="feedback-box feedback-error" role="alert"></div>
+            </div>
+
+            <div class="panel-elevated">
+              <h2 class="panel-title">Tax Computation Summary</h2>
+              <p class="panel-subtitle">Final income tax and matching bracket appear below.</p>
+
+              <div class="result-card" aria-live="polite">
+                <p class="result-label">Final Income Tax</p>
+                <p id="tax-result-amount" class="result-primary">&mdash;</p>
+
+                <dl class="result-breakdown">
+                  <div class="result-row">
+                    <dt>Taxable Income</dt>
+                    <dd id="tax-result-income" class="tabular">Waiting for input</dd>
+                  </div>
+                  <div class="result-row">
+                    <dt>Applicable Tax Bracket</dt>
+                    <dd id="tax-result-bracket">&mdash;</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-blush">
+        <div class="container">
+          <h2 class="section-title">Graduated Income Tax Table</h2>
+          <p class="body-text">
+            The active tax bracket row highlights automatically after computing a valid taxable income.
+          </p>
+          <div class="table-wrap">
+            <table id="tax-bracket-table" class="data-table">
+              <thead>
+                <tr>
+                  <th>Net Taxable Income</th>
+                  <th>Income Tax Formula</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&#8369;250,000 and below</td>
+                  <td>0%</td>
+                </tr>
+                <tr>
+                  <td>Over &#8369;250,000 &ndash; &#8369;400,000</td>
+                  <td>20% of excess over &#8369;250,000</td>
+                </tr>
+                <tr>
+                  <td>Over &#8369;400,000 &ndash; &#8369;800,000</td>
+                  <td>&#8369;30,000 + 25% of excess over &#8369;400,000</td>
+                </tr>
+                <tr>
+                  <td>Over &#8369;800,000 &ndash; &#8369;2,000,000</td>
+                  <td>&#8369;130,000 + 30% of excess over &#8369;800,000</td>
+                </tr>
+                <tr>
+                  <td>Over &#8369;2,000,000 &ndash; &#8369;8,000,000</td>
+                  <td>&#8369;490,000 + 32% of excess over &#8369;2,000,000</td>
+                </tr>
+                <tr>
+                  <td>Over &#8369;8,000,000</td>
+                  <td>&#8369;2,410,000 + 35% of excess over &#8369;8,000,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <p class="footer-brand">Leanne Reyes</p>
+            <p class="footer-meta">
+              BS Computer Science Student · Manila, Philippines · leanne.reyes@example.edu
+            </p>
+          </div>
+          <div class="footer-links">
+            <a href="index.html" class="footer-link">Home</a>
+            <a href="about.html" class="footer-link">About Me</a>
+            <a href="assignments.html" class="footer-link">Assignments</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; <span id="current-year">2026</span> Leanne Reyes. Personal Portfolio.</span>
+          <span>Assignment #2 · Income Tax Calculator</span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
